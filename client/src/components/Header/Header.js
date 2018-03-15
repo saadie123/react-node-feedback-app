@@ -1,15 +1,35 @@
 import React, { Component } from 'react';
-import {NavLink} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 class Header extends Component{
+    renderContent(){
+        switch (this.props.auth) {
+            case null:
+                return null
+                break;
+            case false:
+                return (<li><a href="/auth">Login With Google</a></li>)                
+                break;
+            default:
+                return(
+                    <div>
+                        <li><Link to="#">{this.props.auth.name}</Link></li>                  
+                        <li><a href="/auth/logout">Logout</a></li>
+                    </div>
+                )                
+                break;
+        }
+    }
+
     render(){
         return(
             <nav>
-            <div class="nav-wrapper">
+            <div className="nav-wrapper">
               <div className="container">
-                <a href="#" class="brand-logo">Emaily App</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="#">Login With Google</a></li>
+                <Link to={this.props.auth ? '/surveys' : '/'} className="brand-logo">Emaily App</Link>
+                <ul id="nav-mobile" className="right">
+                    {this.renderContent()}
                 </ul>
               </div>
             </div>
@@ -18,4 +38,10 @@ class Header extends Component{
     }
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth
+    }
+}
+
+export default connect(mapStateToProps, null)(Header);

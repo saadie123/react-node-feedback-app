@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 import {Route, Switch} from 'react-router-dom';
+import {connect} from 'react-redux';
+import * as actions from './store/actions/index';
+import Landing from './components/Landing/Landing';
 import Header from './components/Header/Header';
 import './App.css';
 
-const Landing = () => <h1>Landing</h1>;
 
 const Dashboard = () => <h1>Dashboard</h1>;
 
 const newSurvey = () => <h1>New Survey</h1>;
 
 class App extends Component {
+
+  componentDidMount(){
+    this.props.fetchUser();
+  }
+
   render() {
     return (
       <div>
@@ -26,4 +33,10 @@ class App extends Component {
   }
 }
 
-export default App;
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     fetchUser: () =>  dispatch(actions.fetchUser)
+//   }
+// }
+
+export default connect(null, actions)(App);
