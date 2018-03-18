@@ -11,6 +11,7 @@ require('./services/passport');
 const app = express();
 
 const authRoutes = require('./routes/authRoutes');
+const surveyRoutes = require('./routes/surveyRoutes');
 
 mongoose.connect(keys.mongoDbURL);
 mongoose.Promise = global.Promise;
@@ -24,6 +25,7 @@ app.use(passport.session());
 app.use(bodyParser.json());
 
 app.use('/auth',authRoutes);
+app.use('/api/surveys',surveyRoutes);
 
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('client/build'));
