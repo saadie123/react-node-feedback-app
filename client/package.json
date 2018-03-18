@@ -2,8 +2,8 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy":{
-    "/auth/*":{
+  "proxy": {
+    "/auth/*": {
       "target": "http://localhost:5000"
     }
   },
@@ -15,6 +15,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
+    "react-stripe-checkout": "^2.6.3",
     "redux": "^3.7.2"
   },
   "scripts": {

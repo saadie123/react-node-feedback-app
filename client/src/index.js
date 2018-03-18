@@ -22,3 +22,4 @@ const app = (
 
 ReactDOM.render(app , document.getElementById('root'));
 registerServiceWorker();
+console.log('stripe key',process.env.REACT_APP_STRIPE_KEY);
