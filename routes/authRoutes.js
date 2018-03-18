@@ -19,6 +19,11 @@ router.get('/current_user', (req, res) => {
     res.send(req.user);
 });
 
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
+});
+
 router.post('/stripe', login, async (req, res) => {
     try {
         let charge = await stripe.charges.create({
@@ -33,11 +38,6 @@ router.post('/stripe', login, async (req, res) => {
     } catch (error) {
         console.log(error);
     }
-});
-
-router.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
 });
 
 module.exports = router;
